@@ -29,3 +29,6 @@ springboot-source/build/
 
 ### VS Code ###
 springboot-source/.vscode/
+
+### Vue Code ###
+vue-source/unpackage/
