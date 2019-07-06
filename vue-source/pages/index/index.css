@@ -56,22 +56,20 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+/* 热门超英 end */
 
-/* .movie-score-wrapper {
+
+/* 热门预告片 start */
+.hot-trailers {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 0upx 15upx 15upx 15upx;
 }
-
-.star-ico {
-	width: 20upx;
-	height: 20upx;
-	margin-top: 6upx;
+.trailer {
+	width: 340upx;
+	height: 220upx;
+	margin-top: 10upx;
 }
-
-.movie-score {
-	font-size: 12px;
-	color: grey;
-	margin-left: 8upx;
-} */
-
-/* 热门超英 end */
+/* 热门预告片 end */

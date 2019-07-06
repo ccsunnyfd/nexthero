@@ -28,13 +28,28 @@
 		</view>
 		<!-- 热门超英 end -->
 
+		<!-- 热门预告片 start -->
+		<view class="page-block hot-area">
+			<view class="hot-title-wrapper">
+				<image src="../../static/icos/108x108.png" class="hot-ico"></image>
+				<view class="hot-title">
+					热门预告片
+				</view>
+			</view>
+			<view class="hot-trailers">
+				<video v-for="movie in hotSuperHeroList" :key=movie.id :src="movie.trailer" :poster="movie.poster" controls class="trailer">
+				</video>
+			</view>
+		</view>
+		<!-- 热门预告片 start -->
+
 	</view>
 </template>
 
 <script>
 	// import common from "../../common/common.js";
 	import trailerStars from "../../components/trailerStars.vue";
-	
+
 	export default {
 		data() {
 			return {
