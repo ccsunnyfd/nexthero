@@ -1,0 +1,31 @@
+springboot-source/HELP.md
+springboot-source/target/
+!springboot-source/.mvn/wrapper/maven-wrapper.jar
+!springboot-source/**/src/main/**
+!springboot-source/**/src/test/**
+
+### STS ###
+springboot-source/.apt_generated
+springboot-source/.classpath
+springboot-source/.factorypath
+springboot-source/.project
+springboot-source/.settings
+springboot-source/.springBeans
+springboot-source/.sts4-cache
+
+### IntelliJ IDEA ###
+springboot-source/.idea
+springboot-source/*.iws
+springboot-source/*.iml
+springboot-source/*.ipr
+
+### NetBeans ###
+springboot-source/nbproject/private/
+springboot-source/nbbuild/
+springboot-source/dist/
+springboot-source/nbdist/
+springboot-source/.nb-gradle/
+springboot-source/build/
+
+### VS Code ###
+springboot-source/.vscode/
