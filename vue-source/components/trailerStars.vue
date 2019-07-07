@@ -1,7 +1,7 @@
 <template name="trailerStars">
 	<view class="movie-score-wrapper">
-		<image v-for="(yellow,index) in yellowScore" :key=index src="../static/icos/star-yellow.png" class="star-ico"></image>
-		<image v-for="(grey,index) in greyScore" :key=index src="../static/icos/star-gray.png" class="star-ico"></image>
+		<image v-for="(yellow,index) in yellowScore" :key="'y' + index" src="../static/icos/star-yellow.png" class="star-ico"></image>
+		<image v-for="(grey,index) in greyScore" :key="'g' + index" src="../static/icos/star-gray.png" class="star-ico"></image>
 		<view class="movie-score" v-if="showNum == 1">
 			{{innerScore / 10}}
 		</view>

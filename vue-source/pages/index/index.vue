@@ -37,11 +37,13 @@
 				</view>
 			</view>
 			<view class="hot-trailers">
-				<video v-for="movie in hotSuperHeroList" :key=movie.id :src="movie.trailer" :poster="movie.poster" controls class="trailer">
-				</video>
+				<video v-for="movie in hotSuperHeroList" :key="movie.id"
+				 :src="movie.trailer"
+				  :poster="movie.poster"
+				  controls class="trailer"></video>
 			</view>
 		</view>
-		<!-- 热门预告片 start -->
+		<!-- 热门预告片 end -->
 
 	</view>
 </template>
@@ -54,7 +56,7 @@
 		data() {
 			return {
 				carouselList: [],
-				hotSuperHeroList: []
+				hotSuperHeroList: [],
 			}
 		},
 		components: {
@@ -78,6 +80,7 @@
 				fail: () => {},
 				complete: () => {}
 			});
+
 
 			// 请求热门超英电影海报信息
 			uni.request({
