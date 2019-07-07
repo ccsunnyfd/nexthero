@@ -62,10 +62,13 @@
 						本 阿弗莱克 / 亨利 卡维尔 / 艾米 亚当斯
 					</view>
 				</view>
-				<view class = "guess-oper">
+				<view class = "guess-oper" @click="praiseMe">
 					<image src="../../static/icos/praise.png" class="praise-ico"></image>
 					<view class="praise-me">
 						点赞
+					</view>
+					<view :animation="animationData" class="praise-me animation-opacity">
+						+1
 					</view>
 				</view>
 			</view>
@@ -84,12 +87,20 @@
 			return {
 				carouselList: [],
 				hotSuperHeroList: [],
+				animationData: {}
 			}
 		},
 		components: {
 			trailerStars
 		},
+		onUnload() {
+			// 页面卸载的时候,清楚动画数据
+			this.animationData = {};
+		},
 		onLoad() {
+			// 在页面创建的时候,创建一个临时动画对象
+			this.animation = uni.createAnimation();
+			
 			// var serverUrl = common.serverUrl;
 			var serverUrl = this.serverUrl;
 			// 请求轮播图数据
@@ -127,7 +138,23 @@
 
 		},
 		methods: {
-
+			// 实现点赞动画效果
+			praiseMe() {
+				// 构建动画数据,并且通过step来表示这组动画的完成
+				this.animation.translateY(-60).opacity(1).step({
+					duration: 400
+				});
+				// 导出动画数据到view组件，实现组件的动画效果
+				this.animationData = this.animation.export();
+				
+				// 还原动画
+				setTimeout(function() {
+					this.animation.translateY(0).opacity(0).step({
+						duration: 0
+					});
+					this.animationData = this.animation.export();
+				}.bind(this), 500);
+			}
 		}
 	}
 </script>

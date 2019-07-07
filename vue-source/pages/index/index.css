@@ -136,5 +136,9 @@
 	color: #feab2a;
 	align-self: center;
 }
+.animation-opacity {
+	font-weight: bold;
+	opacity: 0;
+}
 
 /* 猜你喜欢 end */
