@@ -1,8 +1,8 @@
 <template name="trailerStars">
 	<view class="movie-score-wrapper">
-		<image v-for="(yellow,index) in yellowScore" :key="'y' + index" src="../static/icos/star-yellow.png" class="star-ico"></image>
-		<image v-for="(grey,index) in greyScore" :key="'g' + index" src="../static/icos/star-gray.png" class="star-ico"></image>
-		<view class="movie-score" v-if="showNum == 1">
+		<image v-for="(yellow,yindex) in yellowScore" :key="'y' + yindex" src="/static/icos/star-yellow.png" class="star-ico"></image>
+		<image v-for="(grey,gindex) in greyScore" :key="'g' + gindex" src="/static/icos/star-gray.png" class="star-ico"></image>
+		<view class="movie-score" v-if="showNum">
 			{{innerScore / 10}}
 		</view>
 	</view>
@@ -17,8 +17,14 @@
 			};
 		},
 		props: {
-			innerScore: 0,
-			showNum: 0
+			innerScore: {
+				type: Number,
+				default: 0
+			},
+			showNum: {
+				type: Boolean,
+				default: false
+			}
 		},
 		created() {
 			var tmpScore = 0;
@@ -42,7 +48,7 @@
 	.star-ico {
 		width: 20upx;
 		height: 20upx;
-		margin-top: 6upx;
+		/* margin-top: 6upx; */
 	}
 
 	.movie-score {

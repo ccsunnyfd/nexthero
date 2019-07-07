@@ -56,6 +56,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 /* 热门超英 end */
 
 
@@ -67,9 +68,73 @@
 	justify-content: space-between;
 	padding: 0upx 15upx 15upx 15upx;
 }
+
 .trailer {
 	width: 340upx;
 	height: 220upx;
 	margin-top: 10upx;
 }
+
 /* 热门预告片 end */
+
+/* 猜你喜欢 start */
+.guess-area {
+	display: flex;
+	flex-direction: column;
+	margin-top: 12upx;
+}
+
+.single-guess {
+	display: flex;
+	flex-direction: row;
+	padding: 30upx 30upx 20upx 20upx;
+	justify-content: space-between;
+}
+
+.guess-cover-image {
+	width: 180upx;
+	height: 240upx;
+	border-radius: 3%;
+}
+
+.guess-info {
+	display: flex;
+	flex-direction: column;
+	width: 340upx;
+}
+
+.guess-title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.guess-desc {
+	color: grey;
+	font-size: 14px;
+}
+
+/* 点赞css */
+.guess-oper {
+	width: 140upx;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* 左边虚线 */
+	border-left: dashed 2px;
+	border-left-color: #dbdbda;
+}
+
+.praise-ico {
+	width: 40upx;
+	height: 40upx;
+	align-self: center;
+}
+
+.praise-me {
+	font-size: 14px;
+	color: #feab2a;
+	align-self: center;
+}
+
+/* 猜你喜欢 end */
