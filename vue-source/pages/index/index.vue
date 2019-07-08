@@ -103,6 +103,9 @@
 			this.animationDataArr = [{}, {}, {}, {}, {}];
 			// #endif
 		},
+		onPullDownRefresh() {
+			this.refresh();
+		},
 		onLoad() {
 
 			// #ifdef APP-PLUS || MP-WEIXIN
@@ -127,32 +130,44 @@
 				fail: () => {},
 				complete: () => {}
 			});
-
-
-			// 请求电影信息
-			uni.request({
-				url: serverUrl + '/movieInfo/list',
-				method: 'POST',
-				data: {},
-				success: res => {
-					// 获取真实数据之前,务必判断状态为success
-					if (res.data.status === "success") {
-						var retData = res.data.data;
-						// 热门超英电影海报信息
-						this.hotSuperHeroList = retData;
-						// 热门超英电影预告信息
-						this.hotTrailerList = retData.slice(0, 2);
-						// 猜你喜欢电影信息
-						this.guessULike = retData.slice(0, 5);
-					}
-
-				},
-				fail: () => {},
-				complete: () => {}
-			});
-
+			
+			this.refresh();
 		},
 		methods: {
+			refresh() {
+				uni.showLoading({
+					mask: true
+				});
+				uni.showNavigationBarLoading();
+				
+				var serverUrl = this.serverUrl;
+				// 请求电影信息
+				uni.request({
+					url: serverUrl + '/movieInfo/list',
+					method: 'POST',
+					data: {},
+					success: res => {
+						// 获取真实数据之前,务必判断状态为success
+						if (res.data.status === "success") {
+							var retData = res.data.data;
+							// 热门超英电影海报信息
+							this.hotSuperHeroList = retData;
+							// 热门超英电影预告信息
+							this.hotTrailerList = retData.slice(0, 2);
+							// 猜你喜欢电影信息
+							this.guessULike = retData.slice(0, 5);
+						}
+
+					},
+					fail: () => {},
+					complete: () => {
+						uni.hideNavigationBarLoading();
+						uni.hideLoading();
+						uni.stopPullDownRefresh();
+					}
+				});
+			},
+
 			// 实现点赞动画效果
 			praiseMe(e) {
 				// #ifdef APP-PLUS || MP-WEIXIN
@@ -165,7 +180,6 @@
 				// 导出动画数据到view组件，实现组件的动画效果
 				this.animationData = this.animation;
 				this.animationDataArr[gIndex] = this.animationData.export();
-				console.log(this.animationDataArr);
 
 				// 还原动画
 				setTimeout(function() {
