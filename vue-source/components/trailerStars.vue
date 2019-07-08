@@ -1,7 +1,22 @@
 <template name="trailerStars">
 	<view class="movie-score-wrapper">
-		<image v-for="(yellow,yindex) in yellowScore" :key="'y' + yindex" src="/static/icos/star-yellow.png" class="star-ico"></image>
-		<image v-for="(grey,gindex) in greyScore" :key="'g' + gindex" src="/static/icos/star-gray.png" class="star-ico"></image>
+		<!-- // 注意：同级多个 v-for 时 key 的值是不允许重复的，key 的绑定是不支持表达式的，需要按照以下方式处理。
+		// 错误的写法 -->
+		<!-- 		<view v-for="(item, index) in list1" :key="index">{{item}}</view>
+		<view v-for="(item, index) in list2" :key="index">{{item}}</view> -->
+		<!-- // 正确的写法 -->
+		<!-- 		<view>
+			<view v-for="(item, index) in list1" :key="index">{{item}}</view>
+		</view>
+		<view>
+			<view v-for="(item, index) in list2" :key="index">{{item}}</view>
+		</view> -->
+		<view>
+			<image v-for="(yellow,index) in yellowScore" :key="index" src="/static/icos/star-yellow.png" class="star-ico"></image>
+		</view>
+		<view>
+			<image v-for="(grey,index) in greyScore" :key="index" src="/static/icos/star-gray.png" class="star-ico"></image>
+		</view>
 		<view class="movie-score" v-if="showNum">
 			{{innerScore / 10}}
 		</view>
@@ -28,7 +43,7 @@
 		},
 		created() {
 			var tmpScore = 0;
-			if(this.innerScore != null && this.innerScore != undefined && this.innerScore != "") {
+			if (this.innerScore != null && this.innerScore != undefined && this.innerScore != "") {
 				tmpScore = this.innerScore;
 			}
 			var yellowScore = parseInt(tmpScore / 20);
