@@ -6,10 +6,8 @@ import com.nexthero.demo.service.MovieInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +48,34 @@ public class MovieInfoController {
         map.put("data", res);
         return map;
     }
+
+
+    @GetMapping("search/list")
+    @ApiOperation(value = "获取电影搜索信息分页")
+    public Map<String, Object> getMovieByKeywords(@RequestParam(value = "keywords") String keywords,
+                                                  @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                  @RequestParam(value = "size", defaultValue = "9") Integer size) {
+        Map<String, Object> map = new HashMap<>();
+        List<MovieInfo> movies = null;
+        RespBean respBean = null;
+        int totalCount = 0;
+        try {
+            Page<MovieInfo> pageMovies = movieInfoService.getPageMovies(keywords == null ? null : keywords.trim(), page, size);
+            movies = pageMovies.getContent();
+            totalCount = (int) pageMovies.getTotalElements();
+            respBean = new RespBean("success", "获取电影搜索信息成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            respBean = new RespBean("failure", "获取电影搜索信息失败");
+        }
+
+        map.put("status", respBean.getStatus());
+        map.put("msg", respBean.getMsg());
+        map.put("totalCount", totalCount);
+        map.put("data", movies);
+        return map;
+    }
+
 
     @PostMapping("add")
     @ApiOperation(value = "添加新的电影信息")

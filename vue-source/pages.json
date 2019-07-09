@@ -4,13 +4,15 @@
 			"path": "pages/index/index",
 			"style": {
 				"app-plus": {
-					"titleNView": true
+					"titleNView": false
 				},
-				"enablePullDownRefresh": true   //开启单页面下拉刷新功能
+				"enablePullDownRefresh": true //开启单页面下拉刷新功能
 			}
 		}, {
 			"path": "pages/search/search",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "搜索预告片"
+			}
 		}, {
 			"path": "pages/me/me",
 			"style": {}
@@ -18,7 +20,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "NEXTHERO",
+		"navigationBarTitleText": "NEXT超英预告",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},

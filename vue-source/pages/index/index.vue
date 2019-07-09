@@ -153,9 +153,9 @@
 							// 热门超英电影海报信息
 							this.hotSuperHeroList = retData;
 							// 热门超英电影预告信息
-							this.hotTrailerList = retData.slice(0, 2);
+							this.hotTrailerList = retData.slice(9, 11);
 							// 猜你喜欢电影信息
-							this.guessULike = retData.slice(0, 5);
+							this.guessULike = retData.slice(3, 8);
 						}
 
 					},

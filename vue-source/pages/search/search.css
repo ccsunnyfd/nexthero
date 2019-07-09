@@ -1,0 +1,58 @@
+/* 搜索栏 start */
+.search-block {
+	display: flex;
+	flex-direction: row;
+	padding: 0upx 20upx 20upx 20upx;
+	/* 固定搜索栏 */
+	position: fixed;
+	/* #ifdef APP-PLUS */
+	top: 10upx;
+	/* #endif */
+	/* #ifdef H5 */
+	top: 100upx;
+	/* #endif */
+	z-index: 200;
+	background-color: #F8F8F8;
+}
+
+.search-ico-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0upx 10upx;
+	background-color: #e6e6e6;
+}
+
+.search-ico {
+	width: 40upx;
+	height: 40upx;
+}
+
+.search-text {
+	font-size: 14px;
+	width: 650upx;
+	height: 60upx;
+	background-color: #e6e6e6;
+}
+
+/* 搜索栏 end */
+
+/* 搜索结果海报列表 start */
+.movie-list-block {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	padding: 100upx 10upx 0upx 10upx;
+}
+
+.movie-poster-wrapper {
+	padding: 10upx 20upx;
+}
+
+.movie-poster {
+	width: 200upx;
+	height: 270upx;
+}
+
+/* 搜索结果海报列表 end */
