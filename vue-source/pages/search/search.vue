@@ -12,7 +12,7 @@
 		<!-- 搜索结果海报列表 start -->
 		<view class="movie-list-block page-block">
 			<view v-for="movie in searchMoviesList" :key="movie.id" class="movie-poster-wrapper">
-				<image :src="movie.cover" class="movie-poster"></image>
+				<image :src="movie.cover" :data-trailerId="movie.id" @click="showTrailer" class="movie-poster"></image>
 			</view>
 		</view>
 		<!-- 搜索结果海报列表 end -->
@@ -68,11 +68,21 @@
 				this.page = 1;
 				this.searchMoviesList = [];
 				this.pagedTrailerList(this.keywords, this.page, this.pageSize);
+			},
+			showTrailer(e) {
+				var trailerId = e.currentTarget.dataset.trailerid;
+				uni.navigateTo({
+					url: '../movie/movie?trailerId=' + trailerId, 
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
 			}
 		},
 		onLoad() {
 			this.pagedTrailerList('', 1, 15);
 		},
+		// 上拉触底显示下一分页
 		onReachBottom() {
 			var page = this.page + 1;
 			var keywords = this.keywords;
