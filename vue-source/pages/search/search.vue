@@ -73,6 +73,15 @@
 		onLoad() {
 			this.pagedTrailerList('', 1, 15);
 		},
+		onReachBottom() {
+			var page = this.page + 1;
+			var keywords = this.keywords;
+			var totalPages = this.totalPages;
+			if(page > totalPages) {
+				return;
+			}
+			this.pagedTrailerList(keywords, page, this.pageSize);
+		}
 	}
 </script>
 
