@@ -10,13 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * MovieInfoService
@@ -36,6 +39,16 @@ public class MovieInfoService {
         return movieInfoRepository.findAll();
     }
 
+    public MovieInfo getMovieById(String id) {
+        Optional<MovieInfo> movieOptional = movieInfoRepository.findById(id);
+        if (movieOptional.isPresent()) {
+            return movieOptional.get();
+        } else {
+            return null;
+        }
+    }
+
+    @Transactional
     public String addNewMovieInfo(MovieInfo movieInfo) {
         MovieInfo newMovieInfo = movieInfoRepository.save(movieInfo);
         return newMovieInfo.getId();

@@ -1,6 +1,34 @@
 <template>
-	<view>
-		
+	<view class="page">
+		<!-- 视频start -->
+		<view class="player">
+			<video :src="movieDetail.trailer" :poster="movieDetail.poster" controls class="movie"></video>
+		</view>
+		<!-- 视频end -->
+
+		<!-- 影片信息start -->
+		<view class="movieInfo page-block">
+			<image :src="movieDetail.cover" class="cover"></image>
+			<view class="movieDesc">
+				<view class="title">
+					{{movieDetail.name}}
+				</view>
+				<view class="basic-info">
+					{{movieDetail.originalName}}
+				</view>
+				<view class="basic-info">
+					{{movieDetail.basicInfo}}
+				</view>
+				<view class="basic-info">
+					{{movieDetail.totalTime}}
+				</view>
+				<view class="basic-info">
+					{{movieDetail.releaseDate}}
+				</view>
+			</view>
+		</view>
+		<!-- 影片信息end -->
+
 	</view>
 </template>
 
@@ -8,18 +36,39 @@
 	export default {
 		data() {
 			return {
-				
+				movieDetail: {}
 			}
 		},
 		methods: {
-			
+
 		},
 		onLoad(params) {
-			console.log(params.trailerId);
+			var trailerId = params.trailerId;
+
+			var serverUrl = this.serverUrl;
+			// 请求电影信息
+			uni.request({
+				url: serverUrl + '/movieInfo/movie?trailerId=' + trailerId,
+				method: 'GET',
+				data: {},
+				success: res => {
+					// 获取真实数据之前,务必判断状态为success
+					if (res.data.status === "success") {
+						this.movieDetail = res.data.data;
+					}
+
+				},
+				fail: () => {},
+				complete: () => {
+					// uni.hideNavigationBarLoading();
+					// uni.hideLoading();
+					// uni.stopPullDownRefresh();
+				}
+			});
 		}
 	}
 </script>
 
 <style>
-
+	@import url("movie.css");
 </style>

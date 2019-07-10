@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  *
  * @version 1.0
  */
-public interface MovieInfoRepository extends JpaRepository<MovieInfo, Long>, JpaSpecificationExecutor {
+public interface MovieInfoRepository extends JpaRepository<MovieInfo, String>, JpaSpecificationExecutor {
 
 }

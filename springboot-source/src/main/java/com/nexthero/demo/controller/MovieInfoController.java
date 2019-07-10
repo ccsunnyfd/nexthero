@@ -29,6 +29,26 @@ public class MovieInfoController {
         this.movieInfoService = movieInfoService;
     }
 
+    @GetMapping("movie")
+    @ApiOperation(value = "根据电影id获取电影信息")
+    public Map<String, Object> getMovieById(@RequestParam(value = "trailerId") String trailerId ) {
+        Map<String, Object> map = new HashMap<>();
+        MovieInfo res = null;
+        RespBean respBean = null;
+        try {
+            res = movieInfoService.getMovieById(trailerId);
+            respBean = new RespBean("success", "获取电影信息成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            respBean = new RespBean("failure", "获取电影信息失败");
+        }
+
+        map.put("status", respBean.getStatus());
+        map.put("msg", respBean.getMsg());
+        map.put("data", res);
+        return map;
+    }
+
     @PostMapping("list")
     @ApiOperation(value = "获取电影信息列表")
     public Map<String, Object> getMovieInfo() {
