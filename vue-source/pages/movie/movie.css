@@ -40,4 +40,43 @@
 	color: darkgray;
 	line-height: 36upx;
 }
+/* 评分块start */
+.score-block {
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-top: 20upx;
+	width: 360upx;
+	height: 120upx;
+	padding: 20upx;
+	box-shadow: 3px 2px 10px #dedede;
+}
+.big-score {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10upx;
+}
+.score-words {
+	font-size: 15px;
+	color: grey;
+}
+.movie-score {
+	font-size: 26px;
+	font-weight: bold;
+	margin-left: 8upx;
+	color: #FEAB2A;
+	line-height: 60upx;
+}
+.score-stars {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.praise-counts {
+	font-size: 20px;
+	color: grey;
+	line-height: 44upx;
+}
+/* 评分块stop */
 /* 影片信息end */

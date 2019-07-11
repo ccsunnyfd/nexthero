@@ -25,19 +25,40 @@
 				<view class="basic-info">
 					{{movieDetail.releaseDate}}
 				</view>
+				<!-- 评分块start -->
+				<view class="score-block">
+					<view class="big-score">
+						<view class="score-words">综合评分：</view>
+						<view class="movie-score">{{movieDetail.score/10}}</view>
+					</view>
+					<view class="score-stars">
+						<trailer-stars :innerScore="movieDetail.score" :showNum="false"></trailer-stars>
+						<view class="praise-counts">
+							{{movieDetail.prisedCounts}} 人点赞
+						</view>
+					</view>
+				</view>
+				<!-- 评分块stop -->
 			</view>
 		</view>
 		<!-- 影片信息end -->
+
+
 
 	</view>
 </template>
 
 <script>
+	import trailerStars from "../../components/trailerStars.vue";
+
 	export default {
 		data() {
 			return {
 				movieDetail: {}
 			}
+		},
+		components: {
+			trailerStars
 		},
 		methods: {
 
