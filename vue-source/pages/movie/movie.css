@@ -80,3 +80,18 @@
 }
 /* 评分块stop */
 /* 影片信息end */
+
+/* 剧情介绍start */
+.plots-block {
+	padding: 20upx 40upx;
+	background-color: #f7f4f9;
+}
+.plots-title {
+	color: #A9A9A9;
+	font-size: 14px;
+}
+.plots-desc {
+	margin-top: 10upx;
+	font-size: 16px;
+}
+/* 剧情介绍end */

@@ -32,7 +32,9 @@
 						<view class="movie-score">{{movieDetail.score/10}}</view>
 					</view>
 					<view class="score-stars">
-						<trailer-stars :innerScore="movieDetail.score" :showNum="false"></trailer-stars>
+						<block v-if="movieDetail.score >= 0">
+							<trailer-stars :innerScore="movieDetail.score" :showNum="false"></trailer-stars>
+						</block>
 						<view class="praise-counts">
 							{{movieDetail.prisedCounts}} 人点赞
 						</view>
@@ -42,7 +44,23 @@
 			</view>
 		</view>
 		<!-- 影片信息end -->
+		
+		<!-- 分割线start -->
+		<view class="line-wrapper">
+			<view class="line"></view>
+		</view>
+		<!-- 分割线end -->
 
+		<!-- 剧情介绍start -->
+		<view class="plots-block">
+			<view class="plots-title">
+				剧情介绍：
+			</view>
+			<view class="plots-desc">
+				{{movieDetail.plotDesc}}
+			</view>
+		</view>
+		<!-- 剧情介绍end -->
 
 
 	</view>
@@ -65,6 +83,12 @@
 		},
 		onLoad(params) {
 			var trailerId = params.trailerId;
+			
+			// 通过API修改导航栏的属性
+			uni.setNavigationBarColor({
+				frontColor: "#ffffff",
+				backgroundColor: "#000000"
+			})
 
 			var serverUrl = this.serverUrl;
 			// 请求电影信息
