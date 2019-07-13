@@ -44,7 +44,7 @@
 			</view>
 		</view>
 		<!-- 影片信息end -->
-		
+
 		<!-- 分割线start -->
 		<view class="line-wrapper">
 			<view class="line"></view>
@@ -83,7 +83,7 @@
 		},
 		onLoad(params) {
 			var trailerId = params.trailerId;
-			
+
 			// 通过API修改导航栏的属性
 			uni.setNavigationBarColor({
 				frontColor: "#ffffff",
@@ -110,6 +110,34 @@
 					// uni.stopPullDownRefresh();
 				}
 			});
+		},
+		// 此函数仅仅只支持在小程序端的分享,分享到微信群或者微信好友
+		onShareAppMessage() {
+			return {
+				title: this.movieDetail.name,
+				path: '/pages/movie/movie?trailerId=' + this.movieDetail.id
+			}
+		},
+		// 监听导航栏的按钮
+		onNavigationBarButtonTap(e) {
+			var index = e.index;
+			var movieDetail = this.movieDetail;
+			var trailerId = movieDetail.id;
+			var trailerName = movieDetail.name;
+			var cover = movieDetail.cover;
+			var poster = movieDetail.poster;
+			// index为0则分享
+			if (index == 0) {
+				uni.share({
+					provider: 'weixin',
+					type: 0,
+					title: 'NEXT超英预告：《' + trailerName + '》',
+					href: 'http://localhost/#/pages/movie/movie?trailerId=' + trailerId,
+					summary: 'NEXT超英预告：《' + trailerName + '》',
+					imageUrl: cover,
+					success: () => {}
+				});
+			}
 		}
 	}
 </script>

@@ -21,16 +21,19 @@
 			"style": {
 				"app-plus": {
 					"titleNView": {
-						"type": "transparent"
+						"type": "transparent",
+						"buttons": [{
+							"type": "share"
+						}]
 					}
 				}
 			}
+		},
+		{
+			"path": "pages/cover/cover",
+			"style": {}
 		}
-	    ,{
-            "path" : "pages/cover/cover",
-            "style" : {}
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "NEXT超英预告",
