@@ -15,7 +15,14 @@
 			}
 		}, {
 			"path": "pages/me/me",
-			"style": {}
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				},
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "#FFD655"
+			}
 		}, {
 			"path": "pages/movie/movie",
 			"style": {
