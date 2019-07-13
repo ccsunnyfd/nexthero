@@ -21,6 +21,7 @@
 		},
 		methods: {
 			operator() {
+				// #ifdef APP-PLUS || MP-WEIXIN
 				uni.showActionSheet({
 					itemList: ['保存图片到本地'],
 					success: (res) => {
@@ -50,6 +51,7 @@
 						}
 					}
 				})
+				// #endif
 			}
 		}
 	}
