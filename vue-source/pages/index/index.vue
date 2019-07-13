@@ -51,7 +51,9 @@
 				</view>
 			</view>
 			<view v-for="(guess,gIndex) in guessULike" :key="guess.id" class="single-guess">
-				<image :src="guess.cover" class="guess-cover-image"></image>
+				<navigator :url="'../cover/cover?cover=' + guess.cover">
+					<image :src="guess.cover" class="guess-cover-image"></image>
+				</navigator>
 				<view class="guess-info">
 					<view class="guess-title">{{guess.name}}</view>
 					<trailer-stars :innerScore="guess.score" :showNum="false"></trailer-stars>
@@ -91,7 +93,7 @@
 				guessULike: [],
 				animationData: {},
 				animationDataArr: [{}, {}, {}, {}, {}],
-				pics: []    // 放大预览的图片数组
+				pics: [] // 放大预览的图片数组
 			}
 		},
 		components: {
@@ -131,7 +133,7 @@
 				fail: () => {},
 				complete: () => {}
 			});
-			
+
 			this.refresh();
 		},
 		methods: {
@@ -140,7 +142,7 @@
 					mask: true
 				});
 				uni.showNavigationBarLoading();
-				
+
 				var serverUrl = this.serverUrl;
 				// 请求电影信息
 				uni.request({
@@ -154,8 +156,10 @@
 							// 热门超英电影海报信息
 							this.hotSuperHeroList = retData;
 							// 采集放大预览图片数组
-							this.pics = retData.map(x => {return x.cover});
-							
+							this.pics = retData.map(x => {
+								return x.cover
+							});
+
 							// 热门超英电影预告信息
 							this.hotTrailerList = retData.slice(9, 11);
 							// 猜你喜欢电影信息
@@ -171,7 +175,7 @@
 					}
 				});
 			},
-			
+
 			// 实现点击后放大预览效果
 			lookMe(e) {
 				var picIndex = e.currentTarget.dataset.picindex;

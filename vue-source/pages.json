@@ -26,7 +26,11 @@
 				}
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/cover/cover",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "NEXT超英预告",
