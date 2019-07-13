@@ -2,13 +2,15 @@
 	<view class="page">
 		<!-- 视频start -->
 		<view class="player">
-			<video :src="movieDetail.trailer" :poster="movieDetail.poster" controls class="movie"></video>
+			<video id="mytrailer" :src="movieDetail.trailer" :poster="movieDetail.poster" controls class="movie"></video>
 		</view>
 		<!-- 视频end -->
 
 		<!-- 影片信息start -->
 		<view class="movieInfo page-block">
-			<image :src="movieDetail.cover" class="cover"></image>
+			<navigator :url="'../cover/cover?cover=' + guess.cover">
+				<image :src="movieDetail.cover" class="cover"></image>
+			</navigator>
 			<view class="movieDesc">
 				<view class="title">
 					{{movieDetail.name}}
@@ -81,6 +83,20 @@
 		methods: {
 
 		},
+		// 页面初次渲染完成,获得视频上下文对象
+		onReady() {
+			this.videoContext = uni.createVideoContext('myTrailer');
+		},
+		onHide() {
+			// 页面被隐藏的时候,暂停播放
+			this.videoContext.pause();
+		},
+		onShow() {
+			// 页面被再次显示的时候,可以继续播放
+			if (this.videoContext) {
+				this.videoContext.play();
+			}
+		},
 		onLoad(params) {
 			var trailerId = params.trailerId;
 
@@ -138,7 +154,7 @@
 					imageUrl: cover,
 					success: () => {}
 				});
-			}						
+			}
 			// #endif
 		}
 	}
