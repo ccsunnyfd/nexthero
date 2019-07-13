@@ -1,6 +1,6 @@
 <template>
 	<view class="black">
-		<image :src="cover" mode="widthFix" class="cover"></image>
+		<image :src="cover" mode="widthFix" @longpress="operator" class="cover"></image>
 	</view>
 </template>
 
@@ -20,7 +20,37 @@
 			})
 		},
 		methods: {
-
+			operator() {
+				uni.showActionSheet({
+					itemList: ['保存图片到本地'],
+					success: (res) => {
+						// 下标为0则下载
+						if (res.tapIndex == 0) {
+							uni.showLoading({
+								title: "图片保存中..."
+							})
+							uni.downloadFile({
+								url: this.cover,
+								success: (result) => {
+									var tempFilePath = result.tempFilePath;
+									uni.saveImageToPhotosAlbum({
+										filePath: tempFilePath,
+										success: () => {
+											uni.showToast({
+												title: "保存成功",
+												duration: 2000
+											})
+										},
+										complete: () => {
+											uni.hideLoading();
+										}
+									})
+								}
+							})
+						}
+					}
+				})
+			}
 		}
 	}
 </script>
