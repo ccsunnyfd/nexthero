@@ -17,9 +17,9 @@
 				</view>
 			</view>
 			<scroll-view scroll-x="true" class="hot-scrollview">
-				<view class="single-poster" v-for="movie in hotSuperHeroList" :key=movie.id>
+				<view class="single-poster" v-for="(movie, picIndex) in hotSuperHeroList" :key=movie.id>
 					<view class="poster-wrapper">
-						<image :src="movie.cover" class="poster"></image>
+						<image :src="movie.cover" :data-picIndex="picIndex" @click="lookMe" class="poster"></image>
 						<view class="movie-name">{{movie.name}}</view>
 						<trailer-stars :innerScore="movie.score" :showNum="true"></trailer-stars>
 					</view>
@@ -90,7 +90,8 @@
 				hotTrailerList: [],
 				guessULike: [],
 				animationData: {},
-				animationDataArr: [{}, {}, {}, {}, {}]
+				animationDataArr: [{}, {}, {}, {}, {}],
+				pics: []    // 放大预览的图片数组
 			}
 		},
 		components: {
@@ -152,6 +153,9 @@
 							var retData = res.data.data;
 							// 热门超英电影海报信息
 							this.hotSuperHeroList = retData;
+							// 采集放大预览图片数组
+							this.pics = retData.map(x => {return x.cover});
+							
 							// 热门超英电影预告信息
 							this.hotTrailerList = retData.slice(9, 11);
 							// 猜你喜欢电影信息
@@ -166,6 +170,15 @@
 						uni.stopPullDownRefresh();
 					}
 				});
+			},
+			
+			// 实现点击后放大预览效果
+			lookMe(e) {
+				var picIndex = e.currentTarget.dataset.picindex;
+				uni.previewImage({
+					current: this.pics[picIndex],
+					urls: this.pics
+				})
 			},
 
 			// 实现点赞动画效果
