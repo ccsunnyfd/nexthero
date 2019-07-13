@@ -8,7 +8,7 @@
 
 		<!-- 影片信息start -->
 		<view class="movieInfo page-block">
-			<navigator :url="'../cover/cover?cover=' + guess.cover">
+			<navigator :url="'../cover/cover?cover=' + movieDetail.cover">
 				<image :src="movieDetail.cover" class="cover"></image>
 			</navigator>
 			<view class="movieDesc">
@@ -83,6 +83,7 @@
 		methods: {
 
 		},
+		// #ifdef MP-WEIXIN
 		// 页面初次渲染完成,获得视频上下文对象
 		onReady() {
 			this.videoContext = uni.createVideoContext('myTrailer');
@@ -97,6 +98,7 @@
 				this.videoContext.play();
 			}
 		},
+		// #endif
 		onLoad(params) {
 			var trailerId = params.trailerId;
 

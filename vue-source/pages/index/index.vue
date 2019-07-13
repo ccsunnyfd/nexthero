@@ -37,7 +37,8 @@
 				</view>
 			</view>
 			<view class="hot-trailers">
-				<video v-for="movie in hotTrailerList" :key="movie.id" :src="movie.trailer" :poster="movie.poster" controls class="trailer"></video>
+				<video :id="movie.id" :data-playingIndex="movie.id" @play="iAmPlaying" v-for="movie in hotTrailerList" :key="movie.id"
+				 :src="movie.trailer" :poster="movie.poster" controls class="trailer"></video>
 			</view>
 		</view>
 		<!-- 热门预告片 end -->
@@ -109,6 +110,14 @@
 		onPullDownRefresh() {
 			this.refresh();
 		},
+		// #ifdef MP-WEIXIN
+		// 页面被隐藏的时候，暂停播放
+		onHide() {
+			if(this.videoContext) {
+				this.videoContext.pause();
+			}
+		},
+		// #endif
 		onLoad() {
 
 			// #ifdef APP-PLUS || MP-WEIXIN
@@ -137,6 +146,22 @@
 			this.refresh();
 		},
 		methods: {
+			iAmPlaying(e) {
+				// 播放一个视频的时候,需要暂停其他正在播放的视频
+				var trailerId = "";
+				if (e) {
+					trailerId = e.currentTarget.dataset.playingindex;
+					this.videoContext = uni.createVideoContext(trailerId);
+				}
+				var hotTrailerList = this.hotTrailerList;
+				for (var i = 0; i < hotTrailerList.length; i ++) {
+					var tempId = hotTrailerList[i].id;
+					if (tempId != trailerId) {
+						uni.createVideoContext(tempId).pause();
+					}
+				}
+			}
+			,
 			refresh() {
 				uni.showLoading({
 					mask: true
@@ -161,7 +186,7 @@
 							});
 
 							// 热门超英电影预告信息
-							this.hotTrailerList = retData.slice(9, 11);
+							this.hotTrailerList = retData.slice(8, 10);
 							// 猜你喜欢电影信息
 							this.guessULike = retData.slice(3, 8);
 						}
