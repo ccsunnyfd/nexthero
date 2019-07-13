@@ -120,6 +120,7 @@
 		},
 		// 监听导航栏的按钮
 		onNavigationBarButtonTap(e) {
+			// #ifdef APP-PLUS
 			var index = e.index;
 			var movieDetail = this.movieDetail;
 			var trailerId = movieDetail.id;
@@ -137,7 +138,8 @@
 					imageUrl: cover,
 					success: () => {}
 				});
-			}
+			}						
+			// #endif
 		}
 	}
 </script>
