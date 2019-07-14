@@ -2,7 +2,7 @@
 	<view class="page page-fill">
 		<view class="header">
 			<view v-if="userIsLogin">
-				<image src="../../static/icos/108x108.png" class="face"></image>
+				<image :src="userInfo.faceImage" class="face"></image>
 			</view>
 			<view v-else>
 				<image src="http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_-5-AFyVyAABLIH8xBTw233.png" class="face"></image>
@@ -10,9 +10,9 @@
 
 			<view class="info-wrapper" v-if="userIsLogin">
 				<view class="nickname">
-					NEXT 学院
+					{{userInfo.nickname}}
 				</view>
-				<view class="nav-info">ID: 123abc456xyz</view>
+				<view class="nav-info">ID: {{userInfo.id}}</view>
 			</view>
 			<view v-else>
 				<navigator url="../registLogin/registLogin">
@@ -34,9 +34,21 @@
 	export default {
 		data() {
 			return {
-				userIsLogin: false
+				userIsLogin: false,
+				userInfo: {}
 			}
 		},
+		onShow() {
+			// 用户状态的切换
+			var userInfo = uni.getStorageSync("globalUser");
+			if (userInfo != null && userInfo != "" && userInfo != undefined) {
+				this.userIsLogin = true;
+				this.userInfo = userInfo;
+			} else {
+				this.userIsLogin = false;
+				this.userInfo = {};
+			}
+		}
 		methods: {
 
 		}
