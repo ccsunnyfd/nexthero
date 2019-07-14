@@ -5,7 +5,7 @@
 				<image src="../../static/icos/108x108.png" class="face"></image>
 			</view>
 			<view v-else>
-				<image src="http://122.152.205.72:88/group1/M00/00/05/Cp0xxFw_-5-AFyVyAABLIH8xBTw233.png" class="face"></image>
+				<image src="http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_-5-AFyVyAABLIH8xBTw233.png" class="face"></image>
 			</view>
 
 			<view class="info-wrapper" v-if="userIsLogin">
@@ -15,9 +15,11 @@
 				<view class="nav-info">ID: 123abc456xyz</view>
 			</view>
 			<view v-else>
-				<view class="nickname regist-login">
-					注册/登录
-				</view>
+				<navigator url="../registLogin/registLogin">
+					<view class="nickname regist-login">
+						注册/登录
+					</view>
+				</navigator>
 			</view>
 
 			<view class="set-wrapper" v-if="userIsLogin">
