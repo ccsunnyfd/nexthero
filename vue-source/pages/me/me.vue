@@ -23,7 +23,9 @@
 			</view>
 
 			<view class="set-wrapper" v-if="userIsLogin">
-				<image src="../../static/icos/settings.png" class="settings"></image>
+				<navigator url="../meInfo/meInfo">
+					<image src="../../static/icos/settings.png" class="settings"></image>
+				</navigator>
 			</view>
 
 		</view>
@@ -39,15 +41,26 @@
 			}
 		},
 		onShow() {
-			// 用户状态的切换
-			var userInfo = uni.getStorageSync("globalUser");
-			if (userInfo != null && userInfo != "" && userInfo != undefined) {
+			// // 用户状态的切换
+			// var userInfo = uni.getStorageSync("globalUser");
+			// if (userInfo != null && userInfo != "" && userInfo != undefined) {
+			// 	this.userIsLogin = true;
+			// 	this.userInfo = userInfo;
+			// } else {
+			// 	this.userIsLogin = false;
+			// 	this.userInfo = {};
+			// }
+
+			// 使用挂载方法获取用户数据
+			var userInfo = this.getGlobalUser("globalUser");
+			if (userInfo != null) {
 				this.userIsLogin = true;
 				this.userInfo = userInfo;
 			} else {
 				this.userIsLogin = false;
 				this.userInfo = {};
 			}
+
 		},
 		methods: {
 
