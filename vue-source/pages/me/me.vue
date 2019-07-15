@@ -48,7 +48,7 @@
 				this.userIsLogin = false;
 				this.userInfo = {};
 			}
-		}
+		},
 		methods: {
 
 		}

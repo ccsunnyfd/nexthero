@@ -23,28 +23,32 @@ public class UserInfoController {
     private UserInfoService userInfoService;
 
     @Autowired
-    public void setUserInfoService(UserInfoService UserInfoService) {
-        this.userInfoService = UserInfoService;
+    public void setUserInfoService(UserInfoService userInfoService) {
+        this.userInfoService = userInfoService;
     }
 
-    @GetMapping("registOrLogin")
+    @PostMapping("registOrLogin")
     @ApiOperation(value = "登录或注册用户")
     public Map<String, Object> registOrLogin(@RequestBody UserInfo userInfo) {
         Map<String, Object> map = new HashMap<>();
         UserInfo res = null;
         RespBean respBean = null;
 
-        if (userInfo != null) {
+        if (userInfo != null &&
+                (!"".equals(userInfo.getUsername().trim())) &&
+                (!"".equals(userInfo.getPassword().trim()))) {
             // 判断用户是否已注册
             UserInfo resUser = userInfoService.findByUsername(userInfo.getUsername());
 
             if (resUser == null) {          //注册用户
                 res = userInfoService.register(userInfo);
+                res.setPassword("");
                 respBean = new RespBean("201", "已注册新用户");
             } else {                // 用户登录
                 Boolean valid = userInfoService.validation(resUser, userInfo);
                 if (valid) {
                     res = resUser;
+                    res.setPassword("");
                     respBean = new RespBean("200", "登录成功");
                 } else {
                     res = null;
@@ -52,7 +56,7 @@ public class UserInfoController {
                 }
             }
         } else {
-            respBean = new RespBean("404", "没有有效信息");
+            respBean = new RespBean("404", "用户名密码不能为空");
         }
 
         map.put("status", respBean.getStatus());

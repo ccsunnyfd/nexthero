@@ -43,7 +43,8 @@
 					},
 					success: res => {
 						// 如果查询到数据库中有该用户名，就是登录请求，否则是注册请求。这个部分的逻辑由后端完成
-						if (res.data.status == 200) {
+						// 200: 登录成功  201：注册成功   401：密码不对   404：用户名密码不能为空
+						if (res.data.status == 200 || res.data.status == 201) {
 							var userInfo = res.data.data;
 							// 保存用户信息到全局的缓存中
 							uni.setStorageSync("globalUser", userInfo);

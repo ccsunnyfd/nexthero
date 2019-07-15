@@ -2,11 +2,14 @@ package com.nexthero.demo.service;
 
 import com.nexthero.demo.model.UserInfo;
 import com.nexthero.demo.repository.UserInfoRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
+import javax.persistence.EntityManager;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -17,6 +20,9 @@ import java.util.UUID;
 @Service
 public class UserInfoService {
     private UserInfoRepository userInfoRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     public void setUserInfoRepository(UserInfoRepository userInfoRepository) {
@@ -39,7 +45,9 @@ public class UserInfoService {
         userInfo.setNickname(userInfo.getUsername());
         userInfo.setUserUniqueToken(userUniqueToken);
 
-        return userInfoRepository.save(userInfo);
+        UserInfo ret = userInfoRepository.save(userInfo);//因为缓存原因，数据库数据没更新到实体类中，用entityManager.refresh(Entity)方法更新下就好，否则会拿不到default的faceImage字段数据
+        entityManager.refresh(ret);  //这会发送一条select请求
+        return ret;
     }
 
 

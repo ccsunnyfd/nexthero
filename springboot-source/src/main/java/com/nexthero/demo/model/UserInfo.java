@@ -18,6 +18,12 @@ import java.sql.Date;
 @Setter
 @Entity
 public class UserInfo {
+//    //没有password字段的视图
+//    public interface WithoutPasswordView {};
+//    //有password字段的视图
+//    public interface WithPasswordView extends WithoutPasswordView {};
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,
             generator = "native")
@@ -27,7 +33,6 @@ public class UserInfo {
     @Column(name = "username", nullable = false, length = 40)
     private String username;
 
-    @JsonIgnore
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 
@@ -52,7 +57,7 @@ public class UserInfo {
     @Column(name = "birthday", insertable = false)
     private Date birthday;
 
-    @Column(name = "faceImage", insertable = false, columnDefinition = "varchar(255) default 'http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAllFXAAAcIhVPdSg994.png'")
+    @Column(name = "faceImage", insertable = false, columnDefinition = "varchar(255) default 'http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png'")
     private String faceImage;
 
     @Column(name = "isCertified", length = 1, insertable = false, columnDefinition = "int default 0")
