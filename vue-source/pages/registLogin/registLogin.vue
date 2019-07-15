@@ -31,7 +31,7 @@
 			formSubmit(e) {
 				var username = e.detail.value.username;
 				var password = e.detail.value.password;
-				
+
 				// 发起注册/登录的请求
 				var serverUrl = this.serverUrl;
 				uni.request({
@@ -52,6 +52,12 @@
 							uni.switchTab({
 								url: "../me/me"
 							});
+						} else if (res.data.status == 500 || res.data.status == 401) {
+							uni.showToast({
+								title: res.data.msg,
+								duration: 2000,
+								image: "../../static/icos/error.png"
+							})
 						}
 					},
 					fail: () => {},

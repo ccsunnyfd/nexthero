@@ -52,11 +52,11 @@ public class UserInfoController {
                     respBean = new RespBean("200", "登录成功");
                 } else {
                     res = null;
-                    respBean = new RespBean("401", "密码不对");
+                    respBean = new RespBean("401", "密码不正确");
                 }
             }
         } else {
-            respBean = new RespBean("404", "用户名密码不能为空");
+            respBean = new RespBean("500", "用户名密码不能为空");
         }
 
         map.put("status", respBean.getStatus());
