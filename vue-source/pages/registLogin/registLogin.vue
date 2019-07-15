@@ -51,7 +51,7 @@
 							// 切换页面跳转，使用tab切换的api
 							uni.switchTab({
 								url: "../me/me"
-							})
+							});
 						}
 					},
 					fail: () => {},
