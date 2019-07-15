@@ -64,4 +64,20 @@ public class UserInfoController {
         map.put("data", res);
         return map;
     }
+
+
+    @PostMapping("logout")
+    @ApiOperation(value = "退出登录")
+    public Map<String, Object> logout(@RequestParam(value = "userId") Long userId) {
+        Map<String, Object> map = new HashMap<>();
+        UserInfo res = null;
+        RespBean respBean = null;
+
+        respBean = new RespBean("200", "退出登录成功");
+        map.put("status", respBean.getStatus());
+        map.put("msg", respBean.getMsg());
+        map.put("data", res);
+        return map;
+    }
+
 }

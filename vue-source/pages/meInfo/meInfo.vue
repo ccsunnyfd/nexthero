@@ -74,7 +74,7 @@
 			<view class="footer-words" @click="cleanStorage">
 				清理缓存
 			</view>
-			<view class="footer-words" style="margin-top: 10upx;">
+			<view class="footer-words" style="margin-top: 10upx;" @click="logout">
 				退出登录
 			</view>
 		</view>
@@ -100,6 +100,26 @@
 					mask: false,
 					duration: 1500
 				})
+			},
+			logout() {
+				var currentUserId = this.getGlobalUser("globalUser").id;
+				// 发起退出登录的请求
+				var serverUrl = this.serverUrl;
+				uni.request({
+					url: serverUrl + '/user/logout?userId=' + currentUserId,
+					method: 'POST',
+					data: {},
+					success: res => {
+						if (res.data.status == 200) {
+							uni.removeStorageSync("globalUser");
+							uni.switchTab({
+								url: "../me/me"
+							});
+						}
+					},
+					fail: () => {},
+					complete: () => {}
+				});
 			}
 		}
 	}
