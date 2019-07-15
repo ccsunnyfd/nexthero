@@ -6,7 +6,7 @@
 				<view class="info-words">头像</view>
 
 				<view class="right-wrapper">
-					<image src="../../static/icos/default-face.png" class="face"></image>
+					<image :src="globalUser.faceImage" class="face"></image>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
 					</view>
@@ -21,7 +21,7 @@
 				<view class="info-words">昵称</view>
 
 				<view class="right-wrapper">
-					<view class="gray-fields">Next学院</view>
+					<view class="gray-fields">{{globalUser.nickname}}</view>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
 					</view>
@@ -36,7 +36,7 @@
 				<view class="info-words">生日</view>
 
 				<view class="right-wrapper">
-					<view class="gray-fields">2222-01-01</view>
+					<view class="gray-fields">{{globalUser.birthday}}</view>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
 					</view>
@@ -51,7 +51,17 @@
 				<view class="info-words">性别</view>
 
 				<view class="right-wrapper">
-					<view class="gray-fields">男</view>
+					<view class="gray-fields">
+						<view v-if="globalUser.sex == 'm'">
+							男
+						</view>
+						<view v-else-if="globalUser.sex == 'f'">
+							女
+						</view>
+						<view v-else>
+							未选择
+						</view>
+					</view>
 					<view class="arrow-block">
 						<image src="../../static/icos/left-gray-arrow.png" class="arrow-ico"></image>
 					</view>
@@ -59,7 +69,7 @@
 			</view>
 
 		</view>
-		
+
 		<view class="footer-wrapper">
 			<view class="footer-words" @click="cleanStorage">
 				清理缓存
@@ -76,8 +86,11 @@
 	export default {
 		data() {
 			return {
-
+				globalUser: {}
 			}
+		},
+		onShow() {
+			this.globalUser = this.getGlobalUser("globalUser");
 		},
 		methods: {
 			cleanStorage() {
