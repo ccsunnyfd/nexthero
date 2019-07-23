@@ -8,7 +8,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	
+
 	margin-top: 120upx;
 	margin-bottom: 120upx;
 }
@@ -17,6 +17,7 @@
 	width: 160upx;
 	height: 160upx;
 }
+
 /* 头像 end */
 
 /* 注册登录 start */
@@ -24,7 +25,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	
+
 	border-bottom: solid 1px #DBDBDA;
 	padding-bottom: 20upx;
 }
@@ -41,4 +42,47 @@
 .graywords {
 	color: #EAEAEA;
 }
+
 /* 注册登录 end */
+
+/* 第三方登录 start */
+.third-wrapper {
+	width: 100%;
+	margin-top: 60upx;
+}
+
+.third-line {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.third-words {
+	color: #A9A9A9;
+	font-size: 13px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.third-ico {
+	width: 60upx;
+	height: 60upx;
+}
+
+.third-btn-ico {
+	background-image: url(../../static/icos/weixin.png);
+	width: 60upx;
+	height: 60upx;
+	background-color: white;
+	background-size: 60upx 60upx;
+	background-repeat: no-repeat;
+	border: none;
+	padding: 0;
+}
+
+button::after {
+	border: none;
+}
+
+/* 第三方登录 end */

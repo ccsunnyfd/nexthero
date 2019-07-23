@@ -17,6 +17,36 @@
 
 			<button type="primary" form-type="submit" style="margin-top: 60upx;width:90%;">注册/登录</button>
 		</form>
+
+		<!-- 第三方登录H5不支持，所以隐藏掉 -->
+		<!-- #ifndef H5 -->
+		<view class="third-wrapper">
+			<view class="third-line">
+				<view class="single-line">
+					<view class="line"></view>
+				</view>
+
+				<view class="third-words">第三方账号登录</view>
+
+				<view class="single-line">
+					<view class="line"></view>
+				</view>
+			</view>
+
+
+			<view class="third-icos-wrapper">
+				<!-- 5+app 用qq登录 小程序用微信小程序登录 h5不支持 -->
+				<!-- #ifdef APP-PLUS -->
+				<image src="../../static/icos/weixin.png" class="third-ico" data-logintype="weixin" @click="appOAuthLogin"></image>
+				<image src="../../static/icos/QQ.png" class="third-ico" data-logintype="qq" @click="appOAuthLogin" style="margin-left: 80upx;"></image>
+				<image src="../../static/icos/weibo.png" class="third-ico" data-logintype="sinaweibo" @click="appOAuthLogin" style="margin-left: 80upx;"></image>
+				<!-- #endif -->
+				<!-- #ifdef MP-WEIXIN -->
+				<button open-type="getUserInfo" @getuserinfo="wxLogin" class="third-btn-ico"></button>
+				<!-- #endif -->
+			</view>
+		</view>
+		<!-- #endif -->
 	</view>
 </template>
 
@@ -28,6 +58,21 @@
 			}
 		},
 		methods: {
+			// 实现在微信小程序端的微信登录
+			wxLogin(e) {
+				// 通过微信开发能力,获得微信用户的基本信息
+				var userInfo = e.detail.userInfo;
+				
+				// 实现微信登录
+				uni.login({
+					provider: "weixin",
+					success(loginResult) {
+						// console.log(loginResult);
+						// 获得微信登录的code: 授权码
+						var code = loginResult.code;
+					}
+				})
+			},
 			formSubmit(e) {
 				var username = e.detail.value.username;
 				var password = e.detail.value.password;
