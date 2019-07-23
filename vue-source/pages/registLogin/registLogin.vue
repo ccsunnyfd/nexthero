@@ -60,9 +60,16 @@
 		methods: {
 			// 实现在微信小程序端的微信登录
 			wxLogin(e) {
+				var me = this;
+				// console.log(e);
 				// 通过微信开发能力,获得微信用户的基本信息
 				var userInfo = e.detail.userInfo;
-				
+
+				userInfo = {
+					avatarUrl: 'http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_-5-AFyVyAABLIH8xBTw233.png',
+					nickName: 'Bob',
+				}
+
 				// 实现微信登录
 				uni.login({
 					provider: "weixin",
@@ -70,6 +77,24 @@
 						// console.log(loginResult);
 						// 获得微信登录的code: 授权码
 						var code = loginResult.code;
+						var serverUrl = me.serverUrl;
+						uni.request({
+							url: serverUrl + '/user/mpWXLogin/' + code,
+							data: {
+								"avatarUrl": userInfo.avatarUrl,
+								"nickName": userInfo.nickName
+							},
+							method: "POST",
+							success(userResult) {
+								var userInfo = userResult.data.data;
+								// 保存用户信息到全局的缓存中
+								uni.setStorageSync("globalUser", userInfo);
+								// 切换页面跳转，使用tab切换的api
+								uni.switchTab({
+									url: "../me/me"
+								});
+							}
+						})
 					}
 				})
 			},

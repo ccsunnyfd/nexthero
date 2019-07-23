@@ -57,6 +57,12 @@
 	justify-content: center;
 }
 
+.single-line {
+	width: 20%;
+	height: 1px;
+	background-color: #DBDBDA;
+}
+
 .third-words {
 	color: #A9A9A9;
 	font-size: 13px;

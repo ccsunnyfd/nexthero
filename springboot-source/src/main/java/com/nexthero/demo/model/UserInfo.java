@@ -33,7 +33,7 @@ public class UserInfo {
     @Column(name = "username", nullable = false, length = 40)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 255)
+    @Column(name = "password", length = 255)
     private String password;
 
     @Column(name = "nickname", nullable = false, length = 30)
