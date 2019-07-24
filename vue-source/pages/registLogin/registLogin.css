@@ -70,6 +70,11 @@
 	flex-direction: column;
 	justify-content: center;
 }
+.third-icos-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
 
 .third-ico {
 	width: 60upx;

@@ -1,6 +1,7 @@
 package com.nexthero.demo.service;
 
 import com.nexthero.demo.model.UserInfo;
+import com.nexthero.demo.pojo.AppUnionUserBO;
 import com.nexthero.demo.pojo.MPWXUserBO;
 import com.nexthero.demo.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.util.DigestUtils;
 
 import javax.persistence.EntityManager;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.UUID;
 
 /**
@@ -63,6 +65,21 @@ public class UserInfoService {
         return userInfo != null;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public boolean queryAppUnionOpenIdIsExist(String openId, String logintype) {
+        UserInfo userInfo;
+        if ("weixin".equals(logintype)) {
+            userInfo = userInfoRepository.findByAppWxOpenId(openId);
+        } else if ("qq".equals(logintype)) {
+            userInfo = userInfoRepository.findByAppQqOpenId(openId);
+        } else if ("sinaweibo".equals(logintype)) {
+            userInfo = userInfoRepository.findByAppWeiboUId(openId);
+        } else {
+            userInfo = null;
+        }
+        return userInfo != null;
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public UserInfo saveUserMPWXOpenId(String openId, MPWXUserBO mpwxUserBO) {
         UserInfo user = new UserInfo();
@@ -70,7 +87,11 @@ public class UserInfoService {
         user.setNickname(mpwxUserBO.getNickName());
 
         user.setFaceImage(mpwxUserBO.getAvatarUrl());
-        user.setBirthday(new Date(1900, 1, 1));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 1988);
+        calendar.set(Calendar.MONTH, 11);
+        calendar.set(Calendar.DAY_OF_MONTH, 30);
+        user.setBirthday(new Date(calendar.getTime().getTime()));
         user.setIsCertified(0);
         user.setRegistTime(new Date(System.currentTimeMillis()));
         String userUniqueToken = UUID.randomUUID().toString();
@@ -81,10 +102,52 @@ public class UserInfoService {
         return user;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    public UserInfo saveUserAppUnion(String logintype, AppUnionUserBO appUnionUserBO) {
+        UserInfo user = new UserInfo();
+        if ("weixin".equals(logintype)) {
+            user.setAppWxOpenId(appUnionUserBO.getOpenIdOrUid());
+        } else if ("qq".equals(logintype)) {
+            user.setAppQqOpenId(appUnionUserBO.getOpenIdOrUid());
+        } else if ("sinaweibo".equals(logintype)) {
+            user.setAppWeiboUId(appUnionUserBO.getOpenIdOrUid());
+        }
+        user.setNickname(appUnionUserBO.getNickName());
+
+        user.setFaceImage(appUnionUserBO.getFace());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 1988);
+        calendar.set(Calendar.MONTH, 12);
+        calendar.set(Calendar.DAY_OF_MONTH, 30);
+        user.setBirthday(new Date(calendar.getTime().getTime()));
+        user.setIsCertified(0);
+        user.setRegistTime(new Date(System.currentTimeMillis()));
+        String userUniqueToken = UUID.randomUUID().toString();
+        user.setUserUniqueToken(userUniqueToken);
+        user.setUsername(appUnionUserBO.getNickName());
+
+        userInfoRepository.save(user);
+        return user;
+    }
+
     @Transactional(propagation = Propagation.SUPPORTS)
     public UserInfo queryUserForLoginByMPWX(String openId) {
         return userInfoRepository.findByMpWxOpenId(openId);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public UserInfo queryUserForAppLogin(String openId, String logintype) {
+        UserInfo userInfo;
+        if ("weixin".equals(logintype)) {
+            userInfo = userInfoRepository.findByAppWxOpenId(openId);
+        } else if ("qq".equals(logintype)) {
+            userInfo = userInfoRepository.findByAppQqOpenId(openId);
+        } else if ("sinaweibo".equals(logintype)) {
+            userInfo = userInfoRepository.findByAppWeiboUId(openId);
+        } else {
+            userInfo = null;
+        }
+        return userInfo;
+    }
 
 }

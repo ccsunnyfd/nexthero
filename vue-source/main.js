@@ -3,7 +3,7 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-Vue.prototype.serverUrl = "https://localhost:8080/api";
+Vue.prototype.serverUrl = "https://10.0.2.12:8080/api";
 
 Vue.prototype.getGlobalUser = function(key) {
 	var userInfo = uni.getStorageSync(key);

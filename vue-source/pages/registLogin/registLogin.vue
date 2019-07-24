@@ -58,6 +58,64 @@
 			}
 		},
 		methods: {
+			appOAuthLogin(e) {
+				var me = this;
+				// 获取用户的登录类型
+				var logintype = e.currentTarget.dataset.logintype;
+				// 授权登录
+				uni.login({
+					provider: logintype,
+					success(loginRes) {
+						// 授权登录成功以后,获取用户的信息
+						uni.getUserInfo({
+							provider: logintype,
+							success(info) {
+								console.log(JSON.stringify(info));
+								var userInfo = info.userInfo;
+								var face = "";
+								var nickName = "";
+								var openIdOrUid = "";
+								if (logintype == "weixin") {
+									face = userInfo.avatarUrl;
+									nickName = userInfo.nickName;
+									openIdOrUid = userInfo.openId;
+								} else if (logintype == "qq") {
+									face = userInfo.figureurl_qq_2;
+									nickName = userInfo.nickname;
+									openIdOrUid = userInfo.openId;
+								} else if (logintype == "sinaweibo") {
+									face = userInfo.avatar_large;
+									nickName = userInfo.nickname;
+									openIdOrUid = userInfo.id;
+								}
+
+								// 调用开发者后台,执行一键注册或登录
+								var serverUrl = me.serverUrl;
+								uni.request({
+									url: serverUrl + '/user/appUnionLogin/' + logintype,
+									data: {
+										"face": face,
+										"nickName": nickName,
+										"openIdOrUid": openIdOrUid
+									},
+									method: "POST",
+									success(result) {
+										if (result.data.status == 200) {
+											var userInfo = result.data.data;
+											// 保存用户信息到全局的缓存中
+											uni.setStorageSync("globalUser", userInfo);
+											// 切换页面跳转，使用tab切换的api
+											uni.switchTab({
+												url: "../me/me",
+											});
+										}
+									}
+								})
+							}
+						})
+					}
+				});
+			},
 			// 实现在微信小程序端的微信登录
 			wxLogin(e) {
 				var me = this;

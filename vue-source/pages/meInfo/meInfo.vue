@@ -102,24 +102,32 @@
 				})
 			},
 			logout() {
-				var currentUserId = this.getGlobalUser("globalUser").id;
-				// 发起退出登录的请求
-				var serverUrl = this.serverUrl;
-				uni.request({
-					url: serverUrl + '/user/logout?userId=' + currentUserId,
-					method: 'POST',
-					data: {},
-					success: res => {
-						if (res.data.status == 200) {
-							uni.removeStorageSync("globalUser");
-							uni.switchTab({
-								url: "../me/me"
-							});
-						}
-					},
-					fail: () => {},
-					complete: () => {}
-				});
+				var me = this;
+				var globalUser = me.getGlobalUser("globalUser");
+				if (globalUser != null) {
+					var currentUserId = globalUser.id;
+					// 发起退出登录的请求
+					var serverUrl = me.serverUrl;
+					uni.request({
+						url: serverUrl + '/user/logout?userId=' + currentUserId,
+						method: 'POST',
+						data: {},
+						success: res => {
+							if (res.data.status == 200) {
+								uni.removeStorageSync("globalUser");
+								uni.switchTab({
+									url: "../me/me"
+								});
+							}
+						},
+						fail: () => {},
+						complete: () => {}
+					});
+				} else {
+					uni.switchTab({
+						url: "../me/me"
+					});
+				}
 			}
 		}
 	}

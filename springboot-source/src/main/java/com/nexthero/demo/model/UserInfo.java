@@ -3,6 +3,7 @@ package com.nexthero.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -17,6 +18,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @Entity
+@ToString
 public class UserInfo {
 //    //没有password字段的视图
 //    public interface WithoutPasswordView {};
@@ -39,22 +41,22 @@ public class UserInfo {
     @Column(name = "nickname", nullable = false, length = 30)
     private String nickname;
 
-    @Column(name = "mpWxOpenId", insertable = false, length = 200)
+    @Column(name = "mpWxOpenId", length = 200)
     private String mpWxOpenId;
 
-    @Column(name = "appQqOpenId", insertable = false, length = 200)
+    @Column(name = "appQqOpenId", length = 200)
     private String appQqOpenId;
 
-    @Column(name = "appWxOpenId", insertable = false, length = 200)
+    @Column(name = "appWxOpenId", length = 200)
     private String appWxOpenId;
 
-    @Column(name = "appWeiboUId", insertable = false, length = 200)
+    @Column(name = "appWeiboUId", length = 200)
     private String appWeiboUId;
 
-    @Column(name = "sex", insertable = false, length = 1)
+    @Column(name = "sex", length = 1)
     private String sex;    // "m": male  "f": female
 
-    @Column(name = "birthday", insertable = false)
+    @Column(name = "birthday")
     private Date birthday;
 
     @Column(name = "faceImage", insertable = false, columnDefinition = "varchar(255) default 'http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png'")
