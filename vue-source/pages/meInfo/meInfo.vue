@@ -2,7 +2,7 @@
 	<view class="page page-fill">
 		<view class="page-block info-list">
 			<!-- 头像 -->
-			<view class="item-wrapper face-line-upbottom">
+			<view class="item-wrapper face-line-upbottom" @click="operator">
 				<view class="info-words">头像</view>
 
 				<view class="right-wrapper">
@@ -93,6 +93,28 @@
 			this.globalUser = this.getGlobalUser("globalUser");
 		},
 		methods: {
+			operator() {
+				var me = this;
+				var globalUser = me.getGlobalUser("globalUser");
+				uni.showActionSheet({
+					itemList: ["查看我的头像", "从相册选择上传"],
+					success(res) {
+						var index = res.tapIndex;
+						if (index == 0) {
+							// 预览头像
+							var faceArr = [];
+							faceArr.push(globalUser.faceImage);
+							uni.previewImage({
+								urls: faceArr,
+								current: faceArr[0]
+							})
+						} else if (index == 1) {
+							// 选择上传头像
+						}
+					}
+				});
+			}
+			,
 			cleanStorage() {
 				uni.clearStorageSync();
 				uni.showToast({
