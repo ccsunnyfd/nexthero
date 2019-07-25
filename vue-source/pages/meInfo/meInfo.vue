@@ -110,11 +110,22 @@
 							})
 						} else if (index == 1) {
 							// 选择上传头像
+							uni.chooseImage({
+								count: 1,
+								sizeType: ["compressed"],
+								sourceType: ["album", "camera"],
+								success(res) {
+									// 获得临时路径
+									var tempFilePath = res.tempFilePaths[0];
+									uni.navigateTo({
+										url: "../meFace/meFace?tempFilePath=" + tempFilePath
+									})
+								}
+							})
 						}
 					}
 				});
-			}
-			,
+			},
 			cleanStorage() {
 				uni.clearStorageSync();
 				uni.showToast({

@@ -39,20 +39,25 @@
 		{
 			"path": "pages/cover/cover",
 			"style": {}
-		}
-	    ,{
-            "path" : "pages/registLogin/registLogin",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/meInfo/meInfo",
+		}, {
+			"path": "pages/registLogin/registLogin",
+			"style": {}
+		}, {
+			"path": "pages/meInfo/meInfo",
 			"style": {
 				"navigationBarTextStyle": "white",
 				"navigationBarTitleText": "我的",
 				"navigationBarBackgroundColor": "#FFD655"
 			}
-        }
-    ],
+		}, {
+			"path": "pages/meFace/meFace",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "头像上传",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "NEXT超英预告",
