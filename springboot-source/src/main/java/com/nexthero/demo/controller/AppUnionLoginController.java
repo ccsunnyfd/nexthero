@@ -24,7 +24,7 @@ public class AppUnionLoginController {
     private UserInfoService userInfoService;
 
     @ApiOperation(value="App登录", notes="App使用微信、QQ或新浪微博实现用户的登录与注册", httpMethod = "POST")
-    @PostMapping("/appUnionLogin/{logintype}")
+    @PostMapping("appUnionLogin/{logintype}")
     public NEXTJSONResult appUnionLogin(
             @ApiParam(name = "logintype", value = "使用微信、QQ或新浪微博其中一种类型", required = true)
             @PathVariable String logintype,

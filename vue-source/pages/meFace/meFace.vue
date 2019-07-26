@@ -77,7 +77,8 @@
 							uni.navigateBack({
 								delta: 1
 							})
-						} else if (resData.status == 502 || resData.status == 500) {
+							// } else if (resData.status == 502 || resData.status == 500) {
+						} else {
 							uni.showToast({
 								title: resData.msg,
 								image: "../../static/icos/error.png",

@@ -13,6 +13,7 @@ import org.springframework.util.DigestUtils;
 import javax.persistence.EntityManager;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -97,6 +98,19 @@ public class UserInfoService {
         String userUniqueToken = UUID.randomUUID().toString();
         user.setUserUniqueToken(userUniqueToken);
         user.setUsername(mpwxUserBO.getNickName());
+
+        userInfoRepository.save(user);
+        return user;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public UserInfo saveUserFaceImg(Long userId, String faceImg) {
+        Optional<UserInfo> opt = userInfoRepository.findById(userId);
+        if (!opt.isPresent()) {
+            return null;
+        }
+        UserInfo user = opt.get();
+        user.setFaceImage(faceImg);
 
         userInfoRepository.save(user);
         return user;
