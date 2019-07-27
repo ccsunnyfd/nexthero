@@ -1,7 +1,9 @@
 <template>
 	<view class="page page-fill">
 		<view class="pending-wrapper">
-			<image id="face" :src="tempFace" class="pending-face" mode="scaleToFill"></image>
+			<!-- <image id="face" :src="tempFace" class="pending-face" mode="scaleToFill"></image> -->
+			<avatar selWidth="350upx" selHeight="350upx" @upload="upload" :avatarSrc="tempFace" avatarStyle="width: 200upx; height: 200upx; border-radius: 100%;">
+			</avatar>
 		</view>
 
 		<view class="notice">
@@ -13,11 +15,12 @@
 		<view class="footer-area">
 			<view class="line"></view>
 			<view class="footer-operator">
-				<view class="operator-words" @click="changePendingFace">
+				<!-- <view class="operator-words" @click="changePendingFace">
 					重新选择
-				</view>
+				</view> -->
+				<view class="operator-hints">* 点击头像筐进行裁剪和上传</view>
 				<view class="operator-words" @click="upload">
-					确认上传
+					确认直接上传
 				</view>
 			</view>
 		</view>
@@ -26,6 +29,7 @@
 </template>
 
 <script>
+	import avatar from "../../components/yq-avatar.vue";
 	export default {
 		data() {
 			return {
@@ -51,9 +55,10 @@
 					}
 				})
 			},
-			upload() {
+			upload(rsp) {
 				var me = this;
 				var globalUser = me.getGlobalUser("globalUser");
+				me.tempFace = rsp.path;
 
 				uni.showLoading({
 					mask: true,
@@ -92,6 +97,9 @@
 					}
 				});
 			}
+		},
+		components: {
+			avatar
 		}
 	}
 </script>
@@ -118,6 +126,7 @@
 	.pending-face {
 		width: 600upx;
 		height: 600upx;
+		border-radius: 100%;
 	}
 
 	.notice {
@@ -138,6 +147,7 @@
 		bottom: 40upx;
 		width: 100%;
 	}
+
 	.line {
 		height: 5upx;
 		width: 100%;
@@ -147,15 +157,23 @@
 	.footer-operator {
 		padding: 20upx 40upx 20upx 40upx;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-between;
 	}
 
+	.operator-hints {
+		align-self: center;
+		font-size: 6px;
+		color:#696969;
+		padding: 10upx;
+	}
+
 	.operator-words {
-		font: 14px;
-		background-color: #4F4F4F;
+		align-self: center;
+		margin-top: 30upx;
+		font-size: 10px;
+		background-color: #999999;
 		border-radius: 5upx;
-		color: #F7F4F9;
 		padding: 10upx;
 	}
 </style>
