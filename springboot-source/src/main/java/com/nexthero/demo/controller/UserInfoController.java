@@ -66,6 +66,31 @@ public class UserInfoController {
     }
 
 
+    @PostMapping("modifyUserInfo")
+    @ApiOperation(value = "修改用户昵称、生日、性别")
+    public Map<String, Object> modifyUserInfo(@RequestBody UserInfo userInfo) {
+        Map<String, Object> map = new HashMap<>();
+        UserInfo res;
+        RespBean respBean = null;
+
+        UserInfo resUser = userInfoService.modifyUserInfo(userInfo);
+
+        if (resUser == null) {          //没有找到用户
+            res = null;
+            respBean = new RespBean("401", "用户异常");
+        } else {                // 找到用户修改其信息
+
+            res = resUser;
+            respBean = new RespBean("200", "修改成功");
+        }
+
+        map.put("status", respBean.getStatus());
+        map.put("msg", respBean.getMsg());
+        map.put("data", res);
+        return map;
+    }
+
+
     @PostMapping("logout")
     @ApiOperation(value = "退出登录")
     public Map<String, Object> logout(@RequestParam(value = "userId") Long userId) {

@@ -32,7 +32,7 @@
 					url: me.serverUrl + '/user/modifyUserInfo',
 					method: 'GET',
 					data: {
-						"userId": me.globalUser.id,
+						"id": me.globalUser.id,
 						"nickname": nickname
 					},
 					header: {

@@ -1,6 +1,6 @@
 package com.nexthero.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -56,8 +56,13 @@ public class UserInfo {
     @Column(name = "sex", length = 1)
     private String sex;    // "m": male  "f": female
 
-    @Column(name = "birthday")
     private Date birthday;
+
+    @Column(name = "birthday")
+    @JsonDeserialize(using = DateJsonDeserializer.class)
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     @Column(name = "faceImage", insertable = false, columnDefinition = "varchar(255) default 'http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png'")
     private String faceImage;

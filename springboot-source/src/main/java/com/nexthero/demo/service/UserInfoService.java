@@ -38,6 +38,12 @@ public class UserInfoService {
         return userInfoRepository.findByUsername(username);
     }
 
+    // 根据用户id查找用户
+    public UserInfo findByUserId(Long uid) {
+        Optional<UserInfo> user = userInfoRepository.findById(uid);
+        return user.isPresent() ? user.get() : null;
+    }
+
 
     // 注册用户
     @Transactional
@@ -111,6 +117,30 @@ public class UserInfoService {
         }
         UserInfo user = opt.get();
         user.setFaceImage(faceImg);
+
+        userInfoRepository.save(user);
+        return user;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public UserInfo modifyUserInfo(UserInfo newInfo) {
+        if (newInfo == null || newInfo.getId() == null) {
+            return null;
+        }
+        Optional<UserInfo> opt = userInfoRepository.findById(newInfo.getId());
+        if (!opt.isPresent()) {
+            return null;
+        }
+        UserInfo user = opt.get();
+        if (!(newInfo.getNickname() == null || "".equals(newInfo.getNickname().trim()))) {
+            user.setNickname(newInfo.getNickname());
+        } else if (!(newInfo.getBirthday() == null)) {
+            user.setBirthday(newInfo.getBirthday());
+        } else if (!(newInfo.getSex() == null || "".equals(newInfo.getSex().trim()))) {
+            user.setSex(newInfo.getSex());
+        } else {
+            return user;
+        }
 
         userInfoRepository.save(user);
         return user;

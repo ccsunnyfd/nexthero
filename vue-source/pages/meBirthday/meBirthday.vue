@@ -2,7 +2,7 @@
 	<view class="page page-fill">
 		<form @submit="formSubmitBirthday">
 			<view class="page-block" style="margin-top: 20upx;">
-				<picker mode="date" @change="dateChange" >
+				<picker mode="date" name="birthday" @change="dateChange" >
 					<view class="birthday">{{birthday}}</view>
 				</picker>
 			</view>
@@ -38,7 +38,7 @@
 					url: me.serverUrl + '/user/modifyUserInfo',
 					method: 'GET',
 					data: {
-						"userId": me.globalUser.id,
+						"id": me.globalUser.id,
 						"birthday": birthday
 					},
 					header: {
