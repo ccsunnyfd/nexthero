@@ -11,6 +11,7 @@
 		</view>
 
 		<view class="footer-area">
+			<view class="line"></view>
 			<view class="footer-operator">
 				<view class="operator-words" @click="changePendingFace">
 					重新选择
@@ -137,6 +138,11 @@
 		bottom: 40upx;
 		width: 100%;
 	}
+	.line {
+		height: 5upx;
+		width: 100%;
+		color: #4F4F4F;
+	}
 
 	.footer-operator {
 		padding: 20upx 40upx 20upx 40upx;
@@ -147,6 +153,9 @@
 
 	.operator-words {
 		font: 14px;
+		background-color: #4F4F4F;
+		border-radius: 5upx;
 		color: #F7F4F9;
+		padding: 10upx;
 	}
 </style>
