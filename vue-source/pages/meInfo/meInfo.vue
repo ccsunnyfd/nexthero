@@ -17,7 +17,7 @@
 			</view>
 
 			<!-- 昵称 -->
-			<view class="item-wrapper">
+			<view class="item-wrapper" @click="modifyNickname">
 				<view class="info-words">昵称</view>
 
 				<view class="right-wrapper">
@@ -32,7 +32,7 @@
 			</view>
 
 			<!-- 生日 -->
-			<view class="item-wrapper">
+			<view class="item-wrapper" @click="modifyBirthday">
 				<view class="info-words">生日</view>
 
 				<view class="right-wrapper">
@@ -47,7 +47,7 @@
 			</view>
 
 			<!-- 性别 -->
-			<view class="item-wrapper">
+			<view class="item-wrapper" @click="modifySex">
 				<view class="info-words">性别</view>
 
 				<view class="right-wrapper">
@@ -93,6 +93,21 @@
 			this.globalUser = this.getGlobalUser("globalUser");
 		},
 		methods: {
+			modifyNickname() {
+				uni.navigateTo({
+					url: "../meNickname/meNickname"
+				})
+			},
+			modifyBirthday() {
+				uni.navigateTo({
+					url: "../meBirthday/meBirthday"
+				})
+			},
+			modifySex() {
+				uni.navigateTo({
+					url: "../meSex/meSex"
+				})
+			},
 			operator() {
 				var me = this;
 				var globalUser = me.getGlobalUser("globalUser");

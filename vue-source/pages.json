@@ -56,8 +56,31 @@
 				"navigationBarTitleText": "头像上传",
 				"navigationBarBackgroundColor": "#000000"
 			}
+		}, {
+			"path": "pages/meNickname/meNickname",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "修改昵称",
+				"navigationBarBackgroundColor": "#FFD655"
+			}
 		}
-	],
+	    ,{
+            "path" : "pages/meBirthday/meBirthday",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "修改生日",
+				"navigationBarBackgroundColor": "#FFD655"
+			}
+        }
+        ,{
+            "path" : "pages/meSex/meSex",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "修改性别",
+				"navigationBarBackgroundColor": "#FFD655"
+			}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "NEXT超英预告",
